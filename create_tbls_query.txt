@@ -1,0 +1,213 @@
+[brand]
+create table if not exists brand
+(
+  brand_id int          not null auto_increment,
+  name_en  varchar(255) null,
+  name_fa  varchar(255) null,
+  constraint brand_pk
+    primary key (brand_id)
+);
+
+[category]
+create table if not exists category
+(
+  category_id int          not null auto_increment,
+  name_en     varchar(255) null,
+  name_fa     varchar(255) null,
+  keywords    varchar(255) null,
+  constraint category_pk
+    primary key (category_id)
+);
+
+[product]
+create table if not exists product
+(
+  product_id  int          not null,
+  title_en    varchar(255) null,
+  title_fa    varchar(255) null,
+  title_alt   varchar(255) null,
+  url_code    varchar(255) null,
+  brand_id    int          null,
+  category_id int          null,
+  foreign key (brand_id) references brand (brand_id),
+  foreign key (category_id) references category (category_id),
+  constraint product_pk
+    primary key (product_id)
+);
+
+[book]
+create table if not exists book
+(
+  product_id   int          not null,
+  book_id      int auto_increment,
+  isbn         varchar(255) null,
+  subject      varchar(255) null,
+  author       varchar(255) null,
+  publisher    varchar(255) null,
+  translator   varchar(255) null,
+  weight       int          null,
+  pages_no     int          null,
+  cover_type   varchar(255) null,
+  cover_no     int          null,
+  format       varchar(255) null,
+  suitable_for varchar(255) null,
+  description  varchar(1000) null,
+  foreign key (product_id) references product (product_id),
+  constraint book_pk
+    primary key (book_id)
+);
+
+[puzzle]
+create table if not exists puzzle
+(
+  product_id        int          not null,
+  puzzle_id         int          not null auto_increment,
+  weight            int          null,
+  puzzle            varchar(255) null,
+  size              varchar(255) null,
+  type              varchar(255) null,
+  packet_size       varchar(255) null,
+  packet_weight     int          null,
+  producer          varchar(255) null,
+  content           varchar(255) null,
+  description       varchar(1000) null,
+  ages              varchar(255) null,
+  risk_of_devouring boolean      null,
+  foreign key (product_id) references product (product_id),
+  constraint puzzle_pk
+    primary key (puzzle_id)
+);
+
+[keyboard]
+create table if not exists keyboard
+(
+  product_id       int          not null,
+  keyboard_id      int          not null auto_increment,
+  size             varchar(255) null,
+  cable_type       varchar(255) null,
+  os_compatible    varchar(255) null,
+  weight           int          null,
+  background_light boolean      null,
+  shortcut_key_no  int          null,
+  mice_range       varchar(255) null,
+  accuracy         varchar(255) null,
+  fa_letter        boolean      null,
+  keys_no          int          null,
+  dustproof        boolean      null,
+  power            varchar(255) null,
+  cable_len        varchar(255) null,
+  conn_type        varchar(255) null,
+  usb_input        boolean      null,
+  foreign key (product_id) references product (product_id),
+  constraint keyboard_pk
+    primary key (keyboard_id)
+);
+
+[mice]
+create table if not exists mice
+(
+  product_id     int          not null,
+  mice_id        int          not null auto_increment,
+  os_compatible  varchar(255) null,
+  cable_len      varchar(255) null,
+  size           varchar(255) null,
+  sensor_type    varchar(255) null,
+  conn_type      varchar(255) null,
+  accuracy_range varchar(255) null,
+  weight         int          null,
+  two_hand_used  boolean      null,
+  cable_type     varchar(255) null,
+  foreign key (product_id) references product (product_id),
+  constraint mice_pk
+    primary key (mice_id)
+);
+
+[screen_guard]
+create table if not exists screen_guard
+(
+  product_id        int          not null,
+  screen_guard_id   int auto_increment,
+  type              varchar(255) null default null,
+  compatible_with   varchar(255) null default null,
+  easy_to_use       boolean      null default null,
+  thickness         decimal      null default null,
+  scratches_prevent boolean      null default null,
+  strike_prevent    boolean      null default null,
+  light_protecting  boolean      null default null,
+  other_attr        varchar(2000) null default null,
+  foreign key (product_id) references product (product_id),
+  constraint phone_cover_pk
+    primary key (screen_guard_id)
+);
+
+[phone_cover]
+create table if not exists phone_cover
+(
+  product_id      int          not null,
+  phone_cover_id  int auto_increment,
+  compatible_with varchar(255) null,
+  weight          int          null,
+  type            varchar(255) null,
+  size            varchar(255) null,
+  structure       varchar(255) null,
+  material        varchar(255) null,
+  special_attr    varchar(255) null,
+  cover_surface   varchar(255) null,
+  foreign key (product_id) references product (product_id),
+  constraint phone_cover_pk
+    primary key (phone_cover_id)
+);
+
+[review]
+create table if not exists review
+(
+  product_id          int          not null,
+  product_title       varchar(255) null default null,
+  title_en            varchar(255) null default null,
+  user_id             int          null default null,
+  likes               int          null default null,
+  dislikes            int          null default null,
+  verification_status varchar(255) null default null,
+  recommend           varchar(255) null default null,
+  title               varchar(1000) null default null,
+  comment             text         null default null,
+  advantage           varchar(1000) null default null,
+  disadvantage        varchar(1000) null default null
+);
+
+[product_history]
+create table if not exists product_history
+(
+  product_history_id    int      not null,
+  product_variant_id    int      null,
+  selling_price         decimal(20)  null,
+  rrp_price             decimal(20)  null,
+  order_limit           int      null,
+  show_in_price_history int      null,
+  active                boolean  null,
+  created_at            datetime null,
+  product_id            int      not null,
+  marketplace_seller_id int      null,
+  constraint product_history_pk
+    primary key (product_history_id)
+);
+
+[product_review]
+create table if not exists product_review
+(
+  product_id   int      not null,
+  confirmed_at datetime null,
+  comment      text     null
+);
+
+[order]
+create table if not exists `order`
+(
+  order_id               int          not null,
+  customer_id            int          null,
+  item_id                int          null,
+  cart_finalize_datetime datetime     null,
+  gross_order_amount     decimal      null,
+  city_name_fa           varchar(255) null,
+  item_quantity          int          null
+);
