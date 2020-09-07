@@ -1,4 +1,4 @@
-# MySQL Interface for Loading Massive Datasets in C
+# MySQL Interface for Loading Massive CSV Datasets in C
 ### Introuduction
 
 This project proposes an interface for inserting a massive dataset in the CSV format to the MySQL database.
