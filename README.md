@@ -37,7 +37,7 @@ to execute this query, should be set some variables in the MySQL server by the u
 below command in the MySQL shell:  
 `SET GLOBAL VARIABLE local_infile = ‘ON’;`
 ### Run:
-In the project root directory run the following commands:
+In the `src` directory run the following commands:
 
 `$ make`  
 `$ ./main`  
