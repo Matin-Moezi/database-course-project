@@ -1,5 +1,5 @@
 # MySQL Interface for Loading Massive Datasets in C
-## Introuduction
+### Introuduction
 
 This project proposes an interface for inserting a massive dataset in the CSV format to the MySQL database.
 The datasets used in this project are come from the Digikala open datasets (digikala.com/opendata).
@@ -10,14 +10,14 @@ The proposed interface inserts the CSV datasets through bulk insertion in the fo
 This project is written in C programming language and uses ‘libmysqlclient’ library as the MySQL
 connector. For more information about MySQL C connector visit:
 dev.mysql.com/doc/refman/8.0/en/c-api-function-overview.html
-#### Requirements:
+### Requirements:
 - Should be run under the Linux operating system.
 - GCC compiler version 8.3.1 and C99
 - MySQL database server version 8.0.15.
-#### Dependencies:
+### Dependencies:
 The project depends only on Mysql C connector and imports only one header file `mysql.h`.
 For download Mysql C connector visit: dev.mysql.com/downloads/connector/c/
-#### Initialization:
+### Initialization:
 Two main files `app_config.ini` and `mysql_config.ini` are necessary to run the project.
 `App_config.ini` contains project constants such as datasets and queries file path.
 `Mysql_config.ini` contains the information of the MySQL connection.
@@ -36,7 +36,7 @@ that query is `LOAD DATA INFILE`. This approach improves performance significant
 to execute this query, should be set some variables in the MySQL server by the user. So run
 below command in the MySQL shell:  
 `SET GLOBAL VARIABLE local_infile = ‘ON’;`
-#### Run:
+### Run:
 In the project root directory run the following commands:
 
 `$ make`  
