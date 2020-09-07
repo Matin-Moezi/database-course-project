@@ -38,5 +38,6 @@ below command in the MySQL shell:
 `SET GLOBAL VARIABLE local_infile = ‘ON’;`
 #### Run:
 In the project root directory run the following commands:
+
 `$ make`  
 `$ ./main`  
